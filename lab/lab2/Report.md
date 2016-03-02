@@ -26,7 +26,7 @@ enum { // processor fault codes
 ```
 
 trap()函数依然和lab1一样，根据堆栈中的fc中断码进行相应处理。
-在本实验中主要
+在本实验中主要关注页访问异常FRPAGE和FWPAGE
 ```
 trap(int c, int b, int a, int fc, int pc)
 {
@@ -111,6 +111,7 @@ main()函数中测试了不同的中断异常，如非法指令、整除0等，�
 ```
 
 ### 内存访问
+在原有os2.c代码基础上，开启分页后先测试能正常进行数据访问，然后清除页表项，再次访问将引发异常。
 ```c
 //开启分页后，正常测试
   printf("test page read...");
