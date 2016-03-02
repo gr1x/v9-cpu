@@ -27,9 +27,9 @@ main()
 
   stmr(1000);
   ivec(alltraps);
-  
+
   asm(STI);
-  
+
   while (current < 10) {
     if (current & 1) out(1, '1'); else out(1, '0');
   }
