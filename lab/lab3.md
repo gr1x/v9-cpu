@@ -4,23 +4,23 @@
 在ucore/kern/process/pstruct.h文件中定义了进程的数据结构，可以看到其中包含了指向父进程的结构体指针parent。
 ```
 struct proc_struct {
-  enum proc_state state;                        // Process state
-  int pid;                                      // Process ID
-  int runs;                                     // the running times of Proces
-  uintptr_t kstack;                             // Process kernel stack
-  bool need_resched;                            // bool value: need to be rescheduled to release CPU?
-  struct proc_struct *parent;                   // the parent process
-  struct mm_struct *mm;                         // Process's memory management field
-  struct context context;                                  // Switch here to run process, save sp
-  struct trapframe *tf;                         // Trap frame for current interrupt
-  uintptr_t cr3;                                // CR3 register: the base addr of Page Directroy Table(PDT)
-  uint32_t flags;                               // Process flag
-  char name[PROC_NAME_LEN + 1];                 // Process name
-  list_entry_t list_link;                       // Process link list
-  list_entry_t hash_link;                       // Process hash list
-  int exit_code;                                // exit code (be sent to parent proc)
-  uint32_t wait_state;                          // waiting state
-  struct proc_struct *cptr, *yptr, *optr;       // relations between processes
+  enum proc_state state;                        
+  int pid;                                      // 进程ID
+  int runs;                                     
+  uintptr_t kstack;                             
+  bool need_resched;                            
+  struct proc_struct *parent;                   // 父进程结构体指针
+  struct mm_struct *mm;                         
+  struct context context;
+  struct trapframe *tf;
+  uintptr_t cr3;                                
+  uint32_t flags;                              
+  char name[PROC_NAME_LEN + 1];                 
+  list_entry_t list_link;                       
+  list_entry_t hash_link;                       
+  int exit_code;                                
+  uint32_t wait_state;                          
+  struct proc_struct *cptr, *yptr, *optr;       
 };
 ```
 
@@ -42,7 +42,7 @@ int syscall() {
   arg[1] = tf->tf_regs.c;
   switch (num) {
 
-  case SYS_getppid:
+  case SYS_getppid:    //增加调动功能号
     return sys_getppid(arg);
 
   }
@@ -65,7 +65,7 @@ int syscall() {
 #define SYS_mmap            20
 #define SYS_munmap          21
 #define SYS_shmem           22
-#define SYS_getpid          23
+#define SYS_getppid         23   //增加功能号宏定义
 #define SYS_putc            30
 #define SYS_pgdir           31
 
@@ -105,4 +105,4 @@ void kern_init() {
   // }
 }
 ```
-可以看到，依次初始化内存、idt表、irq等。这里可以改为函数指针的结构体，如UBoot的代码中因支持的硬件类型多，初始化过程繁杂，使用函数指针结构体能使代码的模块化更好。
+可以看到，依次初始化内存、idt表、irq等。这里可以改为函数指针的结构体，如UBoot的代码中因支持的硬件类型多，初始化过程繁杂，使用函数指针结构体能使代码的模块化更好，第三方开发人员也能在初始化流程中插入特定代码逻辑而无需重新编译内核。
