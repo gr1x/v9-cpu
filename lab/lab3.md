@@ -42,7 +42,7 @@ int syscall() {
   arg[1] = tf->tf_regs.c;
   switch (num) {
 
-  case SYS_getppid:    //增加调动功能号
+  case SYS_getppid:    //增加调用功能号
     return sys_getppid(arg);
 
   }
