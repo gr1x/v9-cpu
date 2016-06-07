@@ -5,15 +5,15 @@
 查找和利用二进制程序中的漏洞一直都是一项具有挑战性的任务。由于二进制中缺乏相关的数据结构和控制结构，因此二进制分析十分困难且难于扩展。然而，二进制分析的重要性却日益增加，因为在某些情况下，二进制分析是验证目标程序的唯一方法。
 
 这篇文章首先分析了具体的二级制分析方法，静态分析方法主要有：
-1. Recovering Control Flow;
-2. Vulnerability Detection with Flow Modeling
-3. Vulnerability Detection with Data Modeling
+- Recovering Control Flow
+- Vulnerability Detection with Flow Modeling
+- Vulnerability Detection with Data Modeling
 
 动态分析方法主要有：
-1. Dynamic Concrete Execution
+- Dynamic Concrete Execution
 	- Coverage-based fuzzing
 	- Taint-based fuzzing
-2. Dynamic Symbolic Execution
+- Dynamic Symbolic Execution
 	- Classical dynamic symbolic execution
 	- Symbolic-assisted fuzzing
 	- Under-constrained symbolic execution
